@@ -1,6 +1,6 @@
 # School_Member_System
-* For my university - [NCNU]("http://www.gazette.ncnu.edu.tw/")
-* A database course final project, using [Django]("https://www.djangoproject.com/")
+* For my university - [NCNU](http://www.gazette.ncnu.edu.tw/)
+* A database course final project, using [Django](https://www.djangoproject.com/)
 
 ## Fearute
 * import/search/mail member system
