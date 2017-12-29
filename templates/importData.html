@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Import User Data</title>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <form>
+            {% if user %}
+            <h2>{{  user }}</h2>
+            {% else %}
+            <label>username:</label>
+            <input type="text" name="user">
+            <br>
+            <button type="submit">submit</button>
+            {% endif %}
+        </form>
+    </body>
+</html>
