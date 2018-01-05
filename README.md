@@ -1,4 +1,6 @@
 # School_Member_System
+![Python Version](https://img.shields.io/badge/Python-3.5-green.svg)
+![Django Version](https://img.shields.io/badge/Django-2.0-green.svg)
 * For my university - [NCNU](http://www.gazette.ncnu.edu.tw/)
 * A database course final project, using [Django](https://www.djangoproject.com/)
 
