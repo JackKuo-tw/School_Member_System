@@ -25,7 +25,7 @@ class loginInfo(models.Model):
     datetime = models.DateTimeField(auto_now_add=True)
 
 class contact(models.Model):
-    fb = models.URLField(max_length=100)      # Facebook, GitHub 連結, 手機
+    data = models.CharField(max_length=100)      # Facebook, GitHub 連結, 手機
     category = models.IntegerField()          # 1 FB, 2 GitHub, 3 cellphone, 4 校內分機, 5 email
     member = models.ForeignKey('Member', on_delete=models.CASCADE)
 
