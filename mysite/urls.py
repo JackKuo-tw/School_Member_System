@@ -19,11 +19,13 @@ from member.views import hello_world,index
 from django.conf.urls import include, url
 from member.dataOperation import importData,checkData
 
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^hello/$', hello_world),
     url(r'^importData/$', importData),
     url(r'^checkData/$', checkData),
     url(r'^$', index),
+    url(r'^photologue/', include('photologue.urls', namespace='photologue')),
     # url(r'^upload_file/$', upload_file),
 ]
