@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from member.views import hello_world
+from member.views import hello_world,index
 from django.conf.urls import include, url
 from member.dataOperation import importData,checkData
 
@@ -24,5 +24,6 @@ urlpatterns = [
     url(r'^hello/$', hello_world),
     url(r'^importData/$', importData),
     url(r'^checkData/$', checkData),
+    url(r'^$', index),
     # url(r'^upload_file/$', upload_file),
 ]
