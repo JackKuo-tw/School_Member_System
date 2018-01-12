@@ -7,6 +7,7 @@ class Member(models.Model):
     name = models.CharField(max_length=30, blank=True, null=True) # 原始資料姓名
     remark = models.CharField(max_length=40, blank=True, null=True) # 標注
     email = models.EmailField(blank=True, null=True)
+    belonging = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     user = models.OneToOneField(User,
@@ -25,9 +26,9 @@ class loginInfo(models.Model):
     datetime = models.DateTimeField(auto_now_add=True)
 
 class contact(models.Model):
-    data = models.CharField(max_length=100)      # Facebook, GitHub 連結, 手機
+    data = models.CharField(max_length=100, null=True)      # Facebook, GitHub 連結, 手機
     category = models.IntegerField()          # 1 FB, 2 GitHub, 3 cellphone, 4 校內分機, 5 email
-    member = models.ForeignKey('Member', on_delete=models.CASCADE)
+    member = models.ForeignKey(Member, on_delete=models.CASCADE)
 
 class SAM(models.Model):
     is_buy_coat = models.BooleanField(default=False)    # 是否 買系外套
@@ -36,3 +37,11 @@ class SAM(models.Model):
     leave_date = updated_at = models.DateTimeField(blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True)
     member = models.OneToOneField(Member, on_delete=models.CASCADE, null=True)
+
+class course(models.Model):
+    name = models.CharField(max_length=30) # 課程名稱
+
+class lesson(models.Model):
+    teacher = models.ForeignKey(Member, on_delete=models.CASCADE)
+    semester = models.IntegerField() # e.g., 1042
+    course = models.ForeignKey(course, on_delete=models.CASCADE)
