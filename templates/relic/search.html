@@ -1,0 +1,101 @@
+{% include "relic/header.html" %}
+		
+		<!-- Main -->
+		
+			<style>
+            th, td{
+                font-size: 1.5em;
+            }
+            </style>
+            <div class="container" id="fh5co-contact">
+                <div class="fh5co-spacer fh5co-spacer-sm"></div>
+                    
+                <div class="col-md-12">
+                    {% if result_UID %}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                            <td>{{ result_UID.school_id }}</td>
+                            <td>{{ result_UID.name }}</td>
+                            <td>{{ result_UID.remark }}</td>
+                        </tbody>
+                    </table>
+                    <hr>
+                    {% elif result_dep %}
+                        
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for p in result_dep %}
+                                <tr>
+                                <td>{{ p.school_id }}</td>
+                                <td>{{ p.name }}</td>
+                                <td>{{ p.remark }}</td>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                        <hr>
+                    {% elif warning %}
+                    <h2> Sorry, nothing find</h2>
+                    {% endif %}
+                    <!--div class="fh5co-spacer fh5co-spacer-md"></div-->
+                    <div class="fh5co-section-heading">
+                        <h3 class="text-center">Hey, search whom?</h3>
+                    </div>
+                    <form>
+                        <div class="col-md-6 col-md-offset-3">
+                            <div class="form-group">
+                                <label for="name">姓名 / 學號</label>
+                                <input type="text" name="id" class="form-control input-lg" placeholder="Name">
+                            </div>
+                            <div class="form-group" class="form-control">
+                                <label for="級數">級數</label>
+                                <select name="grade" class="form-control">
+                                    <option value="--">--</option>
+                                    <option value="106">106</option>
+                                    <option value="105">105</option>
+                                    <option value="104">104</option>
+                                    <option value="103">103</option>
+                                    <option value="102">102</option>
+                                </select>
+                            </div>
+                          
+                            <div class="form-group">
+                                <label for="系所">系所</label>
+                                <select name="dep" class="form-control">
+                                    <option value="全部">全部</option>
+                                    <option value="資工">資工</option>
+                                    <option value="電機">電機</option>
+                                    <option value="土木">土木</option>
+                                    <option value="應化">應化</option>
+                                    <option value="應光">應光</option>
+                                    <option value="中文">中文</option>
+                                    <option value="教政">教政</option>
+                                    <option value="公行">公行</option>
+                                    <option value="教職">教職</option>
+                                </select>
+                            </div>
+                            <div class="form-group text-center">
+                                <input type="submit" value="Send" class="btn btn-primary btn-lg">
+                            </div>
+                        </div>
+                    </form>
+                </div>       
+            </div>       
+       
+		<!-- Main -->
+	
+		{% include "relic/buttom.html" %}	

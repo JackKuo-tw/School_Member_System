@@ -5,6 +5,7 @@ from datetime import datetime
 from photologue.models import Gallery
 from django.template import RequestContext
 import datetime
+from .models import Member
 # Create your views here.
 def hello_world(request):
 	return render(request, 'hello_world.html', {
@@ -63,8 +64,8 @@ def photos(request):
 
 def gallery(request):
     if 'id' in request.GET:
-        id = request.GET['id']
-        gallery = Gallery.objects.get(id=id)
+        UID = request.GET['id']
+        gallery = Gallery.objects.get(id=UID)
         photos = gallery.photos.all()
         gallery_date = gallery.date_added
         gallery_date = str(gallery_date.year) + '.' + str(gallery_date.month) + '.' + str(gallery_date.day)
@@ -79,8 +80,31 @@ def gallery(request):
             text = text + "<img src='" + url +"' class='thumbnail' >"
             photo_dic['thumb_url'] = url
             url_arr.append(photo_dic)
-        gallery_arr = {'url_arr' : url_arr, 'date' : gallery_date, 'title' : gallery.title, 'id' : id}
+        gallery_arr = {'url_arr' : url_arr, 'date' : gallery_date, 'title' : gallery.title, 'id' : UID}
 
         return render(request, 'relic/gallery.html',locals())
     else:
         return HttpResponse("<h1>404</h1>")
+
+def search(request):
+    if 'id' in request.GET and request.GET['id'] != '':
+        UID = request.GET['id']
+        try:
+            result_UID = Member.objects.get(school_id=UID)
+            return render(request, 'relic/search.html',locals())
+        except:
+            warning = 'Nothing!'
+            return render(request, 'relic/search.html',locals())
+    elif 'grade' in request.GET and 'dep' in request.GET:
+        try:
+            grade = request.GET['grade']
+            dep = request.GET['dep']
+            mapping = {'103' : '學4', '104' : '學3', '105' : '學2', '106' : '學1'}
+            result_dep = Member.objects.filter(remark__icontains=dep).filter(remark__icontains=mapping[grade])
+            return render(request, 'relic/search.html',locals())
+        except:
+            warning = 'Nothing!'
+            return render(request, 'relic/search.html',locals())
+        return render(request, 'relic/search.html',locals())
+    else:
+        return render(request, 'relic/search.html',locals())

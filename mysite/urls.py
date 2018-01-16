@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from member.views import hello_world,index,photos, gallery
+from member.views import hello_world,index,photos, gallery, search
 from django.conf.urls import include, url
 from member.dataOperation import importData,checkData
 from django.conf.urls.static import static
@@ -30,6 +30,7 @@ urlpatterns = [
     url(r'^index.*?', index),
     url(r'^photos/', photos),
     url(r'^gallery/', gallery),
+    url(r'^search/', search),
     url(r'^photologue/', include('photologue.urls', namespace='photologue')),
     
     # url(r'^upload_file/$', upload_file),
