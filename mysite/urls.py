@@ -15,10 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from member.views import hello_world,index
+from member.views import hello_world,index,photos
 from django.conf.urls import include, url
 from member.dataOperation import importData,checkData
-
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,6 +27,9 @@ urlpatterns = [
     url(r'^importData/$', importData),
     url(r'^checkData/$', checkData),
     url(r'^$', index),
+    url(r'^index.*?', index),
+    url(r'^gallery/', photos),
     url(r'^photologue/', include('photologue.urls', namespace='photologue')),
+    
     # url(r'^upload_file/$', upload_file),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
