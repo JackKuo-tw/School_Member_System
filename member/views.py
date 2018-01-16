@@ -26,11 +26,11 @@ def index(request):
     return render(request, 'relic/index.html')
 
 def photos(request):
-    year = datetime.date.today().year  # This year
-    year = [year, year-1, year-2]  # only show three years's gallery from today
+    year = datetime.date.today().year - 1  # This year
+    show_year = [year, year-1, year-2]  # only show three years's gallery from today
     text = ""
     yGallery = [] # store gallery of three years
-    for i in year:
+    for i in show_year:
         yGallery.append( Gallery.objects.filter(date_added__year=i) )
     count = 0
     gallery_arr = []
@@ -40,7 +40,7 @@ def photos(request):
             photos = gallery.photos.all()
             gallery_date = gallery.date_added
             gallery_date = str(gallery_date.year) + '.' + str(gallery_date.month) + '.' + str(gallery_date.day)
-            gallery_title = gallery.title
+            
             url_arr = []
             for img in photos:
                 name = img.image.name
@@ -54,8 +54,12 @@ def photos(request):
                 count += 1
                 if count == 5:
                     break
-            gallery_arr_tmp = {'url_arr' : url_arr, 'date' : gallery_date, 'title' : gallery_title}
+            gallery_arr_tmp = {'url_arr' : url_arr, 'date' : gallery_date, 'title' : gallery.title, 'id' : gallery.id}
             gallery_arr.append(gallery_arr_tmp)
+            count = 0
     #return HttpResponse(text)
     text = '2020'
     return render(request, 'relic/photos.html',locals())
+
+def gallery(request):
+    return HttpResponse('hello')

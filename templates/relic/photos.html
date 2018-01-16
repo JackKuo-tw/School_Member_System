@@ -118,16 +118,18 @@ DESIGNED & DEVELOPED by FREEHTML5.CO
 								<!-- Vertical Menu Tabs -->
 								<div id="fh5co-tab-feature-vertical" class="fh5co-tab">
 									<ul class="resp-tabs-list hor_1">
-										<li>{{ text }}</li>
-										<li>2016</li>
-										<li>2015</li>
+										{% for i in show_year %}
+										<li>{{ i }}</li>
+										{% endfor %}
+										
 									</ul>
 									<div class="resp-tabs-container hor_1">
+										{% for i in gallery_arr %}
 										<div>
 											<div class="row">
-												{% for i in gallery_arr %}
+												
 												<div class="col-md-12">
-													<h2 class="h3"> {{ i.title }}</h2>
+													<h2 class="h3"><a href="../gallery?id={{ i.id }}">{{ i.title }}</h2></a>
 													<p><small>{{ i.date }}</small></p>	
 												</div>
 												
@@ -136,35 +138,11 @@ DESIGNED & DEVELOPED by FREEHTML5.CO
 													<a href='{{ j.url }}' ><img src='{{ j.thumb_url }}' class='thumbnail'></a>
 												</div>
 												{% endfor %}
-												{% endfor %}
+												
 											</div>
 										</div>
-										<div>
-											<div class="row">
-												<div class="col-md-12">
-													<h2 class="h3">Branding &amp; Identity</h2>
-												</div>
-												<div class="col-md-6">
-													<p>Nam tristique porttitor neque, sit amet aliquet metus ultricies non. Vestibulum lacinia ante sit amet enim iaculis tempus. Nulla aliquam tincidunt leo, et consequat justo viverra id. Maecenas lacinia libero vel iaculis tincidunt. Quisque luctus massa eu sodales vehicula. Duis gravida at nunc sit amet sagittis. Fusce pulvinar scelerisque enim, vel interdum erat ullamcorper a. Cras elementum mauris justo, quis lacinia erat mollis sed. Donec malesuada odio eu metus consequat interdum. </p>
-												</div>
-												<div class="col-md-6">
-													<p>In varius, ex ut tincidunt tempor, nunc nisi commodo quam, vel volutpat ex eros id tellus. Morbi cursus libero mi. In condimentum leo in libero volutpat rutrum. Ut pellentesque finibus lacus, sed imperdiet ex tincidunt vel. Proin et blandit nisl, dapibus faucibus urna. Praesent et nisi dictum, placerat purus eget, varius est. Suspendisse potenti. Curabitur blandit faucibus auctor.</p>
-												</div>
-											</div>
-										</div>
-										<div>
-											<div class="row">
-												<div class="col-md-12">
-													<h2 class="h3">Online Shop</h2>
-												</div>
-												<div class="col-md-6">
-													<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda quis deserunt dolorem, debitis cupiditate nihil velit dolores, inventore voluptatem delectus quos atque similique natus eaque qui, nisi repudiandae dolore sit! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum aut maxime eius magnam.</p>
-												</div>
-												<div class="col-md-6">
-													<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio voluptatem, vitae nesciunt ad hic quam quisquam sit possimus officia ratione. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, ex. Lorem ipsum dolor sit amet.</p>
-												</div>
-											</div>
-										</div>
+										{% endfor %}
+										
 									</div>
 								</div>
 								<!-- Vertical Menu Tabs -->
