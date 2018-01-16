@@ -29,7 +29,7 @@ urlpatterns = [
     url(r'^$', index),
     url(r'^index.*?', index),
     url(r'^photos/', photos),
-    url(r'^gallery', gallery),
+    url(r'^gallery/', gallery),
     url(r'^photologue/', include('photologue.urls', namespace='photologue')),
     
     # url(r'^upload_file/$', upload_file),

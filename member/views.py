@@ -62,4 +62,25 @@ def photos(request):
     return render(request, 'relic/photos.html',locals())
 
 def gallery(request):
-    return HttpResponse('hello')
+    if 'id' in request.GET:
+        id = request.GET['id']
+        gallery = Gallery.objects.get(id=id)
+        photos = gallery.photos.all()
+        gallery_date = gallery.date_added
+        gallery_date = str(gallery_date.year) + '.' + str(gallery_date.month) + '.' + str(gallery_date.day)
+        text = ''
+        url_arr = []
+        for img in photos:
+            name = img.image.name
+            photo_dic = {'thunb_url' : '', 'url' : img.image.url}
+            photo_position = name.find('photos/') + 7
+            dot_position = name.rfind('.')
+            url = '../media/' + name[:photo_position] + 'cache/' + name[photo_position:dot_position] + '_thumbnail' + name[dot_position:]
+            text = text + "<img src='" + url +"' class='thumbnail' >"
+            photo_dic['thumb_url'] = url
+            url_arr.append(photo_dic)
+        gallery_arr = {'url_arr' : url_arr, 'date' : gallery_date, 'title' : gallery.title, 'id' : id}
+
+        return render(request, 'relic/gallery.html',locals())
+    else:
+        return HttpResponse("<h1>404</h1>")
