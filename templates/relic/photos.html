@@ -63,7 +63,6 @@ DESIGNED & DEVELOPED by FREEHTML5.CO
 	<style>
 		#fh5co-hero {
 		height: 200px;
-
 	  }
 
 	</style>
@@ -119,22 +118,25 @@ DESIGNED & DEVELOPED by FREEHTML5.CO
 								<!-- Vertical Menu Tabs -->
 								<div id="fh5co-tab-feature-vertical" class="fh5co-tab">
 									<ul class="resp-tabs-list hor_1">
-										<li>2017</li>
+										<li>{{ text }}</li>
 										<li>2016</li>
 										<li>2015</li>
 									</ul>
 									<div class="resp-tabs-container hor_1">
 										<div>
 											<div class="row">
+												{% for i in gallery_arr %}
 												<div class="col-md-12">
-													<h2 class="h3">Aesthetic Design</h2>
+													<h2 class="h3"> {{ i.title }}</h2>
+													<p><small>{{ i.date }}</small></p>	
 												</div>
-												<div class="col-md-6">
-													<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda quis deserunt dolorem, debitis cupiditate nihil velit dolores, inventore voluptatem delectus quos atque similique natus eaque qui, nisi repudiandae dolore sit! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum aut maxime eius magnam. Ipsa qui consequatur laborum culpa recusandae ullam repellendus, quod cum nemo consequuntur quidem labore minima dignissimos, eum!</p>
+												
+												{% for j in url_arr %}
+												<div class="col-md-2">
+													<a href='{{ j.url }}' ><img src='{{ j.thumb_url }}' class='thumbnail'></a>
 												</div>
-												<div class="col-md-6">
-													<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odio voluptatem, vitae nesciunt ad hic quam quisquam sit possimus officia ratione. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestias, ex. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex fuga illum necessitatibus consequuntur aspernatur omnis quidem ut, similique esse assumenda.</p>
-												</div>
+												{% endfor %}
+												{% endfor %}
 											</div>
 										</div>
 										<div>

@@ -3,7 +3,8 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from datetime import datetime
 from photologue.models import Gallery
-
+from django.template import RequestContext
+import datetime
 # Create your views here.
 def hello_world(request):
 	return render(request, 'hello_world.html', {
@@ -25,14 +26,36 @@ def index(request):
     return render(request, 'relic/index.html')
 
 def photos(request):
+    year = datetime.date.today().year  # This year
+    year = [year, year-1, year-2]  # only show three years's gallery from today
     text = ""
-    y2018 = Gallery.objects.filter(date_added__year=2018)
-    y2017 = Gallery.objects.filter(date_added__year=2017)
-    y2016 = Gallery.objects.filter(date_added__year=2016)
-    for gallery in y2018:
-        photos = gallery.photos.all()
-        for img in photos:
-            url = img.image.url
-            text = text + "<img src='" + url +"'</img>"
+    yGallery = [] # store gallery of three years
+    for i in year:
+        yGallery.append( Gallery.objects.filter(date_added__year=i) )
+    count = 0
+    gallery_arr = []
+    
+    for year in range(len(yGallery)):
+        for gallery in yGallery[year]:
+            photos = gallery.photos.all()
+            gallery_date = gallery.date_added
+            gallery_date = str(gallery_date.year) + '.' + str(gallery_date.month) + '.' + str(gallery_date.day)
+            gallery_title = gallery.title
+            url_arr = []
+            for img in photos:
+                name = img.image.name
+                photo_dic = {'thunb_url' : '', 'url' : img.image.url}
+                photo_position = name.find('photos/') + 7
+                dot_position = name.rfind('.')
+                url = '../media/' + name[:photo_position] + 'cache/' + name[photo_position:dot_position] + '_thumbnail' + name[dot_position:]
+                text = text + "<img src='" + url +"' class='thumbnail' >"
+                photo_dic['thumb_url'] = url
+                url_arr.append(photo_dic)
+                count += 1
+                if count == 5:
+                    break
+            gallery_arr_tmp = {'url_arr' : url_arr, 'date' : gallery_date, 'title' : gallery_title}
+            gallery_arr.append(gallery_arr_tmp)
     #return HttpResponse(text)
-    return render(request, 'relic/photos.html')
+    text = '2020'
+    return render(request, 'relic/photos.html',locals())

@@ -28,7 +28,7 @@ urlpatterns = [
     url(r'^checkData/$', checkData),
     url(r'^$', index),
     url(r'^index.*?', index),
-    url(r'^gallery/', photos),
+    url(r'^photos/', photos),
     url(r'^photologue/', include('photologue.urls', namespace='photologue')),
     
     # url(r'^upload_file/$', upload_file),
