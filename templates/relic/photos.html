@@ -11,27 +11,27 @@
 								<!-- Vertical Menu Tabs -->
 								<div id="fh5co-tab-feature-vertical" class="fh5co-tab">
 									<ul class="resp-tabs-list hor_1">
-										{% for i in show_year %}
-										<li>{{ i }}</li>
+										{% for year in show_year %}
+										<li>{{ year }}</li>
 										{% endfor %}
 										
 									</ul>
 									<div class="resp-tabs-container hor_1">
-										{% for i in gallery_arr %}
+										{% for year in gallery_arr %}
 										<div>
 											<div class="row">
-												
+												{% for k in year %}
 												<div class="col-md-12">
-													<h2 class="h3"><a href="../gallery?id={{ i.id }}">{{ i.title }}</h2></a>
-													<p><small>{{ i.date }}</small></p>	
+													<h2 class="h3"><a href="../gallery?id={{ k.id }}">{{ k.title }}</h2></a>
+													<p><small>{{ k.date }}</small></p>	
 												</div>
 												
-												{% for j in url_arr %}
+												{% for j in k.url_arr %}
 												<div class="col-md-2">
 													<a href='{{ j.url }}' ><img src='{{ j.thumb_url }}' class='thumbnail'></a>
 												</div>
 												{% endfor %}
-												
+												{% endfor %}
 											</div>
 										</div>
 										{% endfor %}

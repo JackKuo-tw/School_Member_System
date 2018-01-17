@@ -18,6 +18,7 @@
                             <th>ID</th>
                             <th>Name</th>
                             <th>Status</th>
+                            <th>Ext.</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -25,6 +26,7 @@
                             <td>{{ result_UID.school_id }}</td>
                             <td>{{ result_UID.name }}</td>
                             <td>{{ result_UID.remark }}</td>
+                            <td>{{ ext.data }}</td>
                         </tbody>
                     </table>
                     <hr>
@@ -70,6 +72,7 @@
                                     <option value="104">104</option>
                                     <option value="103">103</option>
                                     <option value="102">102</option>
+                                    <option value="教授">教授</option>
                                 </select>
                             </div>
                           
@@ -84,8 +87,7 @@
                                     <option value="應光">應光</option>
                                     <option value="中文">中文</option>
                                     <option value="教政">教政</option>
-                                    <option value="公行">公行</option>
-                                    <option value="教職">教職</option>
+                                    <option value="公行">公行</option>    
                                 </select>
                             </div>
                             <div class="form-group text-center">

@@ -37,6 +37,7 @@ def photos(request):
     gallery_arr = []
     
     for year in range(len(yGallery)):
+        year_arr = []
         for gallery in yGallery[year]:
             photos = gallery.photos.all()
             gallery_date = gallery.date_added
@@ -56,10 +57,12 @@ def photos(request):
                 if count == 5:
                     break
             gallery_arr_tmp = {'url_arr' : url_arr, 'date' : gallery_date, 'title' : gallery.title, 'id' : gallery.id}
-            gallery_arr.append(gallery_arr_tmp)
             count = 0
+            year_arr.append(gallery_arr_tmp)
+        gallery_arr.append(year_arr)
+            
     #return HttpResponse(text)
-    text = '2020'
+    
     return render(request, 'relic/photos.html',locals())
 
 def gallery(request):
@@ -99,7 +102,7 @@ def search(request):
         try:
             grade = request.GET['grade']
             dep = request.GET['dep']
-            mapping = {'103' : '學4', '104' : '學3', '105' : '學2', '106' : '學1'}
+            mapping = {'103' : '學4', '104' : '學3', '105' : '學2', '106' : '學1', '教授' : '教授'}
             result_dep = Member.objects.filter(remark__icontains=dep).filter(remark__icontains=mapping[grade])
             return render(request, 'relic/search.html',locals())
         except:
